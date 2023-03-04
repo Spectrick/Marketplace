@@ -20,7 +20,7 @@
                 {{ __('(Не опубликовано)') }}
             </div>
         @endif
-        <x-button-link href="{{ route('cart.add', $product->id) }}" class="text-center" role="button" color="warning" size="block">
+        <x-button-link href="{{ route('cart.add', $product->id) }}" class="text-center text-decoration-none" role="button" color="warning" size="block">
             {{ __('В корзину') }}
         </x-button-link>
     </div>

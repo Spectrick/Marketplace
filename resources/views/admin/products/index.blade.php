@@ -22,7 +22,6 @@
     @else
         <div class="row">
             @foreach($products as $product)
-{{--                <div class="col-xs-18 col-sm-6 col-md-3">--}}
                     <div class="col-xs-18 col-sm-6 col-md-3 d-flex align-items-stretch">
                     <x-product.card prefix="admin." :product="$product" />
                 </div>

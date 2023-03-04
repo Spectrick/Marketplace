@@ -28,14 +28,14 @@
                         <x-cart-dropdown-menu />
                     </li>
                     <li class="nav-item">
-                        <div class="row mx-auto mt-2">
+                        <div class="row mx-auto mt-2 pr-2">
                             <div class="col-xs-6">
                                 <img src="{{ Auth::user()->avatar }}" class="img-thumbnail" width="40px" alt="{{ Auth::user()->name }}">
                             </div>
                             <div class="col-xs-6">
-                                <a href="{{ route('logout') }}" class="nav-link">
+                                <div class="username my-2">
                                     {{ Auth::user()->name }}
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </li>

@@ -39,15 +39,13 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-//        Auth::guard('web')->logout();
-
-        $request->session()->flush();
-
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        alert(__('Вы вышли из учётной записи'), 'secondary');
+
+        return redirect('/');
 
     }
 }
