@@ -14,7 +14,6 @@ class ProductController extends Controller
 {
     public function index (Request $request)
     {
-
         $categories = Category::pluck('name')->toArray();
 
         $validated = $request->validate([
@@ -38,7 +37,7 @@ class ProductController extends Controller
             ->latest('id')
             ->paginate(12);
 
-        return view('admin.products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories'));
     }
 
     public function show ($product_id)
@@ -47,7 +46,6 @@ class ProductController extends Controller
 
         $images_url = (array) json_decode(Product::find($product_id)->images->url);
 
-        return view('admin.products.show', compact('product', 'images_url'));
+        return view('products.show', compact('product', 'images_url'));
     }
-
 }

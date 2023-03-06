@@ -34,7 +34,9 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="username my-2">
-                                    {{ Auth::user()->name }}
+                                    <a href="{{ route('user') }}">
+                                        {{ Auth::user()->name }}
+                                    </a>
                                 </div>
                             </div>
                         </div>

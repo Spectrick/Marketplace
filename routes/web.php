@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Product\CommentController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\LoginController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,11 @@ Route::middleware('guest')->group(function()
 });
 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function() {
+    Route::get('user', [UserController::class, 'index'])->name('user');
+    Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
+});
 
 Route::resource('products/{product}/comments', CommentController::class);
