@@ -40,8 +40,8 @@
                 </x-form-item>
 
                 <x-form-item>
-                    <x-label for="avatar" class="col-md-4 col-form-label text-md-end">{{ __('Аватар') }}</x-label>
-                    <div class="col-md-6">
+                    <div class="input-group">
+                        <x-label for="avatar" class="input-group-text">{{ __('Изображение пользователя') }}</x-label>
                         <x-input id="avatar" type="file" name="avatar" />
                         @error('avatar')
                             <span class="invalid-feedback" role="alert">

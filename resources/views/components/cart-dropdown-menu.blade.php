@@ -1,8 +1,8 @@
 <div class="col-lg-12 col-sm-12 col-12 main-section">
     <div class="dropdown">
-        <x-button data-toggle="dropdown" color="info">
+        <x-button data-bs-toggle="dropdown" color="warning">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ __('Корзина') }}
-            <span class="badge badge-pill badge-danger">
+            <span class="badge text-bg-danger">
                 {{ count((array) session('cart')) }}
             </span>
         </x-button>
@@ -10,7 +10,7 @@
             <div class="row total-header-section">
                 <div class="col-lg-6 col-sm-6 col-6">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span class="badge badge-pill badge-danger">
+                    <span class="badge text-bg-danger">
                         {{ count((array) session('cart')) }}
                     </span>
                 </div>
@@ -52,8 +52,8 @@
             @endif
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-                    <x-button-link href="{{ route('cart') }}" color="primary" size="block">
-                        {{ __('Корзина') }}
+                    <x-button-link href="{{ route('cart') }}" color="warning" size="block">
+                        {{ __('Перейти к корзине') }}
                     </x-button-link>
                 </div>
             </div>

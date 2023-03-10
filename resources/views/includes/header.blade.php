@@ -8,7 +8,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link {{ activeLink('home') }}">
                         {{ __('Главная') }}
@@ -22,22 +22,20 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ms-auto">
                 @auth
                     <li class="nav-item">
                         <x-cart-dropdown-menu />
                     </li>
-                    <li class="nav-item">
-                        <div class="row mx-auto mt-2 pr-2">
-                            <div class="col-xs-6">
-                                <img src="{{ Auth::user()->avatar }}" class="img-thumbnail" width="40px" alt="{{ Auth::user()->name }}">
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="username my-2">
-                                    <a href="{{ route('user') }}">
-                                        {{ Auth::user()->name }}
-                                    </a>
-                                </div>
+                    <li class="nav-item my-auto">
+                        <div class="row mx-auto">
+                            <div class="inline-block">
+                                @if(Auth::user()->avatar)
+                                    <img src="{{ Auth::user()->avatar }}" class="img-thumbnail" alt="{{ Auth::user()->name }}" style="height:40px">
+                                @endif
+                                <a href="{{ route('user') }}">
+                                    {{ Auth::user()->name }}
+                                </a>
                             </div>
                         </div>
                     </li>

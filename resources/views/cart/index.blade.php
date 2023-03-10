@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <td colspan="5" class="text-right">
-                <a href="{{ url('/products') }}" class="btn btn-warning">
+                <a href="{{ url('/products') }}" class="btn btn-primary">
                     <i class="fa fa-angle-left"></i> {{ __('Продолжить покупки') }}
                 </a>
                 <button class="btn btn-success">{{ __('Оформить заказ') }}</button>

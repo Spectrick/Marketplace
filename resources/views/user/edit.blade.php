@@ -20,25 +20,47 @@
             @include('includes.errors')
             <x-form action="{{ route('user.update', $user->id) }}" method="put" enctype="multipart/form-data">
                 <x-form-item>
-                    <x-label required>{{ __('Имя пользователя') }}</x-label>
+                    <x-label>{{ __('Имя пользователя') }}</x-label>
                     <x-input name="name" value="{{ $user->name ?? '' }}" autofocus />
                 </x-form-item>
 
                 <x-form-item>
-                    <x-label required>{{ __('E-mail') }}</x-label>
+                    <x-label>{{ __('E-mail') }}</x-label>
                     <x-input type="email" name="email" value="{{ $user->email ?? '' }}" />
                 </x-form-item>
 
                 <x-form-item>
-                    <x-label for="avatar" class="col-md-4 col-form-label text-md-end">{{ __('Изображение пользователя') }}</x-label>
-                    <div class="col-md-6">
-                        <x-input id="avatar" type="file" name="avatar" />
-                        @error('avatar')
-                        <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <div class="input-group">
+                        <label class="input-group-text" for="avatar">{{ __('Изображение пользователя') }}</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" />
                     </div>
+                    @error('avatar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="avatar col text-center mt-3">
+                        @if($user->avatar)
+                            <img src="{{ $user->avatar }}" alt="{{ $user->name }}">
+                        @else
+                            {{ __('Изображение отсутствует') }}
+                        @endif
+                    </div>
+                </x-form-item>
+
+                <x-form-item>
+                    <x-label>{{ __('Старый пароль') }}</x-label>
+                    <x-input type="password" name="old_password" />
+                </x-form-item>
+
+                <x-form-item>
+                    <x-label>{{ __('Новый пароль') }}</x-label>
+                    <x-input type="password" name="new_password" />
+                </x-form-item>
+
+                <x-form-item>
+                    <x-label>{{ __('Введите новый пароль ещё раз') }}</x-label>
+                    <x-input type="password" name="new_password_confirmation" />
                 </x-form-item>
 
                 <div class="text-center">

@@ -15,13 +15,13 @@
 
             <div class="row">
                 @isset($right)
-                    <div class="col-xs-6 mr-3">
+                    <div class="col-xs-6 me-3">
                         {{ $right }}
                     </div>
                 @endisset
 
                 @isset($right_2)
-                    <div class="col-xs-6 mr-3">
+                    <div class="col-xs-6 me-3">
                         {{ $right_2 }}
                     </div>
                 @endisset

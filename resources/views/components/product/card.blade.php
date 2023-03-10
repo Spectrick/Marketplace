@@ -7,7 +7,7 @@
                 {{ $product->price }} ₽
             </h6>
         </div>
-        <h5 class="card-title mb-0">
+        <h5 class="card-title">
             <a href="{{ route($prefix.'products.show', $product->id) }}">
                 {{ $product->name }}
             </a>

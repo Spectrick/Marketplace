@@ -18,33 +18,33 @@
 
         <x-card-body>
             <x-form-item>
-                <div class="row ml-0 justify-content-between border-bottom">
-                    <div>
+                <div class="row justify-content-between border-bottom mx-3">
+                    <div class="col">
                         {{ __('Имя пользователя')}}:
                     </div>
-                    <div>
+                    <div class="col">
                         {{ $user->name }}
                     </div>
                 </div>
             </x-form-item>
 
             <x-form-item>
-                <div class="row ml-0 justify-content-between border-bottom">
-                    <div>
+                <div class="row justify-content-between border-bottom mx-3">
+                    <div class="col">
                         {{ __('Email пользователя') }}:
                     </div>
-                    <div>
+                    <div class="col">
                         {{ $user->email }}
                     </div>
                 </div>
             </x-form-item>
 
             <x-form-item>
-                <div class="row ml-0 justify-content-between">
-                    <div class="my-auto">
+                <div class="row justify-content-between mx-3">
+                    <div class="col my-auto">
                         {{ __('Аватар') }} :
                     </div>
-                    <div class="avatar ml-3">
+                    <div class="avatar col text-center">
                         @if($user->avatar)
                             <img src="{{ $user->avatar }}" alt="{{ $user->name }}">
                         @else
