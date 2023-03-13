@@ -79,7 +79,7 @@ class ProductController extends Controller
             array_push($images, $image_url);
         }
 
-        $thumbnail = ImageResize::make($validated['images'][0])->resize(150, 150, function ($constraint) {
+        $thumbnail = ImageResize::make($validated['images'][0])->resize(200, 200, function ($constraint) {
                 return $constraint->aspectRatio();
             });
 

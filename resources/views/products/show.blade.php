@@ -20,13 +20,7 @@
         </h2>
 
         @if($images_url)
-            @foreach($images_url as $image_url)
-                @if(str_starts_with($image_url, 'http'))
-                    <img src="{{ $image_url }}" alt="{{ $product->name }}" class="img-fluid mb-3">
-                @else
-                    <img src="{{ '/storage/'.$image_url }}" alt="{{ $product->name }}" class="img-fluid mb-3">
-                @endif
-            @endforeach
+            <x-gallery :product="$product" :images_url="$images_url" />
         @endif
 
         <div class="text-light badge bg-primary text-wrap my-2 align-self-start">
@@ -39,16 +33,11 @@
             <h6>
                 {{ __('Описание товара:') }}
             </h6>
-            <div class="pt-2">
+            <div class="pt-2 mb-3">
                 {!! $product->description !!}
             </div>
         </div>
 
-        @if (!$product->published)
-            <div class="small text-muted">
-                {{ __('(Не опубликовано)') }}
-            </div>
-        @endif
         <x-button-link href="{{ route('cart.add', $product->id) }}" class="text-center" role="button" color="warning">
             {{ __('В корзину') }}
         </x-button-link>
