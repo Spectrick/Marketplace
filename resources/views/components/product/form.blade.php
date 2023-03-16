@@ -37,15 +37,7 @@
         <x-input type="file" name="images[]" multiple />
     </x-form-item>
 
-    @if ($images_url)
-        @foreach($images_url as $image_url)
-            @if(str_starts_with($image_url, 'http'))
-                <img src="{{ $image_url }}" alt="{{ $product->name }}" class="img-fluid">
-            @else
-                <img src="{{ '/storage/'.$image_url }}" alt="{{ $product->name }}" class="img-fluid">
-            @endif
-        @endforeach
-    @endif
+    <x-gallery :product="$product" :images_url="$images_url" />
 
     <x-form-item>
         <x-checkbox name="published">

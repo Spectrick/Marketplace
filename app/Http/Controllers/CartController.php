@@ -44,8 +44,6 @@ class CartController extends Controller
 
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
-            session()->flash('success', 'Товар обновлён');
             alert(__('Товар обновлён'));
 
         }
@@ -59,7 +57,6 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Товар удалён из корзины');
             alert(__('Товар удалён из корзины'));
         }
     }

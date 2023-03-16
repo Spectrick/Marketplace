@@ -60,6 +60,9 @@ class ProductSeeder extends Seeder
                 'name' => 'Обувь',
             ],
             [
+                'name' => 'Напитки и еда',
+            ],
+            [
                 'name' => 'Другое',
             ],
         ];
@@ -73,20 +76,20 @@ class ProductSeeder extends Seeder
 
             DB::table('products')->insert([
                 'name' => $faker->text(15),
-                'description' => $faker->text(90),
+                'description' => $faker->text(150),
                 'price' => mt_rand(500, 100000),
                 'published' => true,
                 'category_id' => $random_id,
             ]);
 
-            $thumbnail_url = $faker->imageUrl(300, 300, $categories['name'][$random_id]);
+            $thumbnail_url = $faker->imageUrl(300, 300, true);
 
             $thumbnail = 'data:image/png;base64,' . base64_encode(file_get_contents($thumbnail_url));
 
             DB::table('images')->insert([
                 'product_id' => $i+1,
                 'alt' => $faker->text(15),
-                'url' => json_encode($faker->imageUrl(800, 600, $categories['name'][$random_id])),
+                'url' => json_encode($faker->imageUrl(800, 600, true)),
                 'thumbnail' => $thumbnail,
             ]);
         }

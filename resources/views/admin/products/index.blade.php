@@ -18,7 +18,9 @@
     @include('products.filter')
 
     @if ($products->isEmpty())
-        {{ __('Товары отсутствуют') }}
+        <div class="text-center">
+            {{ __('Товары отсутствуют') }}
+        </div>
     @else
         <div class="row">
             @foreach($products as $product)

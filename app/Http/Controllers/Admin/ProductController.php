@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Http\Request;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Image;
 
@@ -21,7 +21,7 @@ class ProductController extends Controller
 
         $validated = $request->validate([
            'search' => ['nullable', 'string', 'max:50'],
-            'category_id' => ['nullable', 'integer'],
+           'category_id' => ['nullable', 'integer'],
         ]);
 
         $products = Product::query()
@@ -79,7 +79,7 @@ class ProductController extends Controller
             array_push($images, $image_url);
         }
 
-        $thumbnail = ImageResize::make($validated['images'][0])->resize(200, 200, function ($constraint) {
+        $thumbnail = ImageResize::make($validated['images'][0])->resize(250, 250, function ($constraint) {
                 return $constraint->aspectRatio();
             });
 

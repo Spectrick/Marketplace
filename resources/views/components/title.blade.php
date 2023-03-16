@@ -8,20 +8,20 @@
 
         <div class="d-flex justify-content-between">
             <div>
-                <h2 class="h2 m-0">
+                <h2 class="h4 m-0">
                     {{ $slot }}
                 </h2>
             </div>
 
             <div class="row">
                 @isset($right)
-                    <div class="col-xs-6 me-3">
+                    <div class="col-sm-5 me-3">
                         {{ $right }}
                     </div>
                 @endisset
 
                 @isset($right_2)
-                    <div class="col-xs-6 me-3">
+                    <div class="col-sm-4 me-3">
                         {{ $right_2 }}
                     </div>
                 @endisset

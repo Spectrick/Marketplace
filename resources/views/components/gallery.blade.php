@@ -4,9 +4,9 @@
     @foreach($images_url as $image_url)
         <figure id="image-{{ $loop->iteration }}">
             @if(str_starts_with($image_url, 'http'))
-                <img src="{{ $image_url }}" alt="{{ $product->name }}" class="img-fluid">
+                <img src="{{ $image_url }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:90vh">
             @else
-                <img src="{{ '/storage/'.$image_url }}" alt="{{ $product->name }}" class="img-fluid">
+                <img src="{{ '/storage/'.$image_url }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:90vh">
             @endif
         </figure>
         @php($img_count = $loop->count)

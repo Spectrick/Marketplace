@@ -13,7 +13,6 @@
             </x-button-link>
         </x-slot>
 
-
         <x-slot name="right_2">
             <x-form action="{{ route('admin.products.delete', $product->id) }}" method="post">
                 @method('DELETE')
@@ -32,36 +31,56 @@
     </x-title>
 
     <div class="mb-3">
-        <h2 class="h4">
+        <h3 class="fw-bolder mb-3">
             {{ $product->name }}
-        </h2>
+        </h3>
 
         @if($images_url)
             <x-gallery :product="$product" :images_url="$images_url" />
         @endif
 
-        <div class="text-light badge bg-primary text-wrap my-2 align-self-start">
-            <h6 class="mb-0">
-                {{ $product->price }} ₽
-            </h6>
-        </div>
-
-        <div class="pt-3">
-            <h6>
-                {{ __('Описание товара:') }}
-            </h6>
-            <div class="pt-2 mb-3">
+        <dl class="row mt-3">
+            <dt class="col-sm-3">
+                {{ __('Цена') }}:
+            </dt>
+            <dd class="col-sm-9">
+                <div class="text-light badge bg-primary text-wrap my-2 align-self-start">
+                    <h6 class="mb-0">
+                        {{ $product->price }} ₽
+                    </h6>
+                </div>
+            </dd>
+            <dt class="col-sm-3">
+                {{ __('Категория') }}:
+            </dt>
+            <dd class="col-sm-9">
+                {{ $product->category->name }}
+            </dd>
+            <dt class="col-sm-3">
+                {{ __('Описание товара') }}:
+            </dt>
+            <dd class="col-sm-9">
                 {!! $product->description !!}
-            </div>
-        </div>
+            </dd>
+            <dt class="col-sm-3">
+                {{ __('Отзывы о товаре') }}:
+            </dt>
+            <dd class="col-sm-9">
+                <x-button-link href="{{ route('admin.products.comments', $product->id) }}">
+                    {{ __('Посмотреть отзывы') }}
+                </x-button-link>
+            </dd>
+        </dl>
 
         @if (!$product->published)
             <div class="small text-muted">
                 {{ __('(Не опубликовано)') }}
             </div>
         @endif
+
         <x-button-link href="{{ route('cart.add', $product->id) }}" class="text-center" role="button" color="warning">
             {{ __('В корзину') }}
         </x-button-link>
     </div>
+
 @endsection
