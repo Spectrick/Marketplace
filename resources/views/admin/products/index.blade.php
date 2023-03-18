@@ -12,7 +12,6 @@
                 {{ __('Добавить товар') }}
             </x-button-link>
         </x-slot>
-
     </x-title>
 
     @include('products.filter')
@@ -24,7 +23,7 @@
     @else
         <div class="row">
             @foreach($products as $product)
-                <div class="col-xs-18 col-sm-6 col-md-3 d-flex align-items-stretch">
+                <div class="col-xs-16 col-sm-4 col-md-2 d-flex align-items-stretch">
                     <x-product.card prefix="admin." :product="$product" />
                 </div>
             @endforeach

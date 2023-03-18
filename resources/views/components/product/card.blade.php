@@ -12,9 +12,6 @@
                 {{ $product->name }}
             </a>
         </h5>
-        {{--<p class="card-text">
-            {!! $product->description !!}
-        </p>--}}
         @if (!$product->published)
             <div class="small text-muted">
                 {{ __('(Не опубликовано)') }}

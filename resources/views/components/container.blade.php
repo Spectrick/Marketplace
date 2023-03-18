@@ -1,3 +1,3 @@
-<div class="container-lg">
+<div class="container-md">
     {{ $slot }}
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
@@ -38,7 +39,7 @@ class ProductController extends Controller
                         ->where('name', 'like', "%{$search}%");
                 })
             ->latest('id')
-            ->paginate(12);
+            ->paginate(18);
 
         return view('admin.products.index', compact('products', 'categories'));
     }
@@ -101,18 +102,28 @@ class ProductController extends Controller
     {
         $product = Product::query()->findOrFail($product_id);
 
-        $images_url = (array) json_decode(Product::find($product_id)->images->url);
+        $ratings = Comment::where('product_id', $product_id)
+            ->groupBy('rating')
+            ->selectRaw('rating, count(*) as count, count(*) / (select count(*) from comments where product_id = ?) * 100 as percentage', [$product_id])
+            ->get();
 
-        return view('admin.products.show', compact('product', 'images_url'));
+        $product_rating['avg'] = round(Comment::query()->where('product_id', $product_id)->avg('rating'), 2);
+
+        $product_rating['total'] = $ratings->sum('count');
+
+        foreach ($ratings as $rating) {
+            $product_rating[$rating->rating]['count'] = $rating->count;
+            $product_rating[$rating->rating]['percentage'] = round($rating->percentage, 1);
+        }
+
+        return view('admin.products.show', compact('product', 'product_rating'));
     }
 
     public function edit (Product $product)
     {
-        $images_url = (array) json_decode(Product::find($product->id)->images->url);
-
         $categories = Category::pluck('name')->toArray();
 
-        return view('admin.products.edit', compact('product', 'images_url', 'categories'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function update (Request $request, $product_id)

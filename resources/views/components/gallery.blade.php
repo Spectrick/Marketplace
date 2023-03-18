@@ -1,6 +1,7 @@
 @props(['product', 'images_url'])
 
 <div data-gallery="simple">
+    @php($images_url = (array) json_decode($product->images->url))
     @foreach($images_url as $image_url)
         <figure id="image-{{ $loop->iteration }}">
             @if(str_starts_with($image_url, 'http'))

@@ -37,7 +37,7 @@
         <x-input type="file" name="images[]" multiple />
     </x-form-item>
 
-    <x-gallery :product="$product" :images_url="$images_url" />
+    <x-gallery :product="$product" />
 
     <x-form-item>
         <x-checkbox name="published">

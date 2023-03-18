@@ -24,7 +24,7 @@
     </x-form>
 
     <x-product.form action="{{ route('admin.products.update', $product->id) }}" method="put"
-                    enctype="multipart/form-data" :product="$product" :images_url="$images_url" :categories="$categories">
+                    enctype="multipart/form-data" :product="$product" :categories="$categories">
         <x-button type="submit">
             {{ __('Сохранить') }}
         </x-button>

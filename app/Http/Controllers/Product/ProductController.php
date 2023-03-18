@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use Illuminate\Http\Request;
 
+use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
+
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 
@@ -44,8 +46,20 @@ class ProductController extends Controller
     {
         $product = Product::query()->findOrFail($product_id);
 
-        $images_url = (array) json_decode(Product::find($product_id)->images->url);
+        $ratings = Comment::where('product_id', $product_id)
+            ->groupBy('rating')
+            ->selectRaw('rating, count(*) as count, count(*) / (select count(*) from comments where product_id = ?) * 100 as percentage', [$product_id])
+            ->get();
 
-        return view('products.show', compact('product', 'images_url'));
+        $product_rating['avg'] = round(Comment::query()->where('product_id', $product_id)->avg('rating'), 2);
+
+        $product_rating['total'] = $ratings->sum('count');
+
+        foreach ($ratings as $rating) {
+            $product_rating[$rating->rating]['count'] = $rating->count;
+            $product_rating[$rating->rating]['percentage'] = round($rating->percentage, 1);
+        }
+
+        return view('products.show', compact('product', 'product_rating'));
     }
 }

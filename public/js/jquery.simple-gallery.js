@@ -52,7 +52,7 @@
 
     $.fn.gallery.defaults = {
         tag      : 'figure',
-        loop     : true,
+        loop     : false,
         interval : 5
     };
 
