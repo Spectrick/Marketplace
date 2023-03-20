@@ -39,7 +39,7 @@ class ProductController extends Controller
                         ->where('name', 'like', "%{$search}%");
                 })
             ->latest('id')
-            ->paginate(18);
+            ->paginate(24);
 
         return view('admin.products.index', compact('products', 'categories'));
     }

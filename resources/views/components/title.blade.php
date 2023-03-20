@@ -1,5 +1,5 @@
 <div>
-    <div class="border-bottom pb-3 mb-4">
+    <div class="border-bottom pb-1 mb-4">
         @isset($link)
             <div class="mb-2">
                 {{ $link }}
@@ -8,9 +8,9 @@
 
         <div class="d-flex justify-content-between">
             <div>
-                <h2 class="h4 m-0">
+                <h3 class="h4 m-0">
                     {{ $slot }}
-                </h2>
+                </h3>
             </div>
 
             <div class="row">

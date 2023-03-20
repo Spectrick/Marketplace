@@ -4,7 +4,7 @@
     <div class="col-xs-12 col-md-8">
         <div class="bg-light p-3 rounded shadow">
             <div class="row">
-                <div class="col-xs-12 col-md-4 text-center">
+                <div class="col-xs-12 col-md-3 pe-0 text-center">
                     <h1 class="rating-num">
                         {{ $product_rating['avg'] }}
                     </h1>
@@ -21,15 +21,18 @@
                         <i class="fa fa-user" aria-hidden="true"></i> {{ $product_rating['total'] }} {{ __('отзывов') }}
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-8">
-                    <div class="row rating-desc">
+                <div class="col-xs-12 col-md-9 ps-0">
+                    <div class="row align-items-center">
                         @for($i = 5; $i >= 1; $i--)
-                            <div class="col-xs-3 col-md-5 text-end">
+                            <div class="col-xs-3 col-md-4 px-0 text-end">
                                 @for($j = $i; $j >= 1; $j--)
                                     <i class="fa fa-star"></i>
                                 @endfor
                             </div>
-                            <div class="col-xs-8 col-md-7 mt-1">
+                            <div class="col-md-1 mx-1 px-0 text-center">
+                                ({{ ($product_rating[$i]['count'] ?? 0) }})
+                            </div>
+                            <div class="col-xs-8 col-md-6 pe-0">
                                 <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="{{ ($product_rating[$i]['percentage'] ?? 0) }}"
                                      aria-valuemin="0" aria-valuemax="100">
                                     @switch($i)

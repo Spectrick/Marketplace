@@ -37,7 +37,7 @@ class ProductController extends Controller
                         ->where('name', 'like', "%{$search}%");
                 })
             ->latest('id')
-            ->paginate(12);
+            ->paginate(24);
 
         return view('products.index', compact('products', 'categories'));
     }
