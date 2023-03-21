@@ -1,6 +1,8 @@
 @props(['prefix' => null, 'product' => null])
 <x-card>
-    <img src="{{ $product->images()->value('thumbnail') }}" alt="{{ $product->name }}">
+    <a href="{{ route($prefix.'products.show', $product->id) }}">
+        <img src="{{ $product->images()->value('thumbnail') }}" class="img-fluid" alt="{{ $product->name }}">
+    </a>
     <div class="card-body d-flex justify-content-end flex-column pt-1">
         <div class="text-light badge bg-primary text-wrap my-2 align-self-start">
             <h6 class="mb-0">

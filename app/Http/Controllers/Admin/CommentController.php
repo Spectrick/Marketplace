@@ -66,7 +66,7 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
-    public function delete($product_id, $comment_id)
+    public function delete($comment_id)
     {
         Comment::destroy($comment_id);
 

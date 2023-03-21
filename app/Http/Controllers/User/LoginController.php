@@ -25,7 +25,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            alert(__('Добро пожаловать!'));
+            alert(__('Здравствуйте') . ', ' . Auth::user()->name . '!');
 
             return redirect()->intended('/');
         }

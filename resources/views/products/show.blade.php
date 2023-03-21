@@ -7,7 +7,7 @@
     <x-title>
         {{ __('Просмотр товара') }}
 
-        <x-slot name="link">
+        <x-slot name="right">
             <a href="{{ route('products') }}">
                 {{ __('Назад') }}
             </a>
@@ -16,7 +16,7 @@
 
     <div class="container" style="max-width: 960px;">
         <div class="mb-3">
-            <h3 class="fw-bolder ms-5">
+            <h3 class="fw-bolder">
                 {{ $product->name }}
             </h3>
 

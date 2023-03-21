@@ -15,7 +15,7 @@
             @foreach($comments as $comment)
                 <x-comment.item :comment="$comment">
                     <div class="float-end ms-3">
-                        <x-form action="{{ route('admin.products.comments.delete', ['product' => $product_id, 'comment' => $comment->id]) }}" method="POST">
+                        <x-form action="{{ route('admin.products.comments.delete', ['comment' => $comment->id]) }}" method="POST">
                             @method('DELETE')
                             <x-button type="submit" color="secondary">
                                 {{ __('Удалить') }}

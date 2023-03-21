@@ -6,7 +6,7 @@
             </div>
         @endisset
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h3 class="h4 m-0">
                     {{ $slot }}

@@ -137,7 +137,7 @@ class ProductSeeder extends Seeder
             $thumbnail_base64 = (string) $thumbnail->encode('data-url');
 
             DB::table('products')->insert([
-                'name' => $faker->text(15),
+                'name' => substr($faker->text(15), 0, -1),
                 'description' => $faker->text(200),
                 'price' => mt_rand(500, 100000),
                 'published' => true,

@@ -45,7 +45,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        alert(__('Регистрация прошла успешно!'));
+        alert(__('Регистрация прошла успешно! Добро пожаловать') . ', ' . Auth::user()->name . '!');
 
         return redirect()->route('home');
     }

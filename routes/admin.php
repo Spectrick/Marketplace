@@ -18,5 +18,5 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group (function ()
     Route::post('products/{product}/comments', [CommentController::class, 'store'])->name('admin.products.comments.store');
     Route::get('products/{product}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('admin.products.comments.edit');
     Route::put('products/{product}/comments/{comment}', [CommentController::class, 'update'])->name('admin.products.comments.update');
-    Route::delete('products/{product}/comments/{comment}', [CommentController::class, 'delete'])->name('admin.products.comments.delete');
+    Route::delete('products/comments/{comment}', [CommentController::class, 'delete'])->name('admin.products.comments.delete');
 });

@@ -6,11 +6,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as ImageResize;
 
-class ProductSeeder extends Seeder
+class ProductSeederSimple extends Seeder
 {
     /**
      * Run the database seeds.
