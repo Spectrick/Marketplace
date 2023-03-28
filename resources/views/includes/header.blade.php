@@ -41,8 +41,8 @@
                     </li>
                     <li class="nav-item my-auto">
                         <x-form id="logout-form" action="{{ route('logout') }}" method="GET">
-                            <x-button type="submit" color="secondary">
-                                {{ __('Выйти') }}
+                            <x-button class="border pb-1 pe-2" type="submit" color="light">
+                                <i class="fa fa-sign-out" style="font-size:24px"></i>
                             </x-button>
                         </x-form>
                     </li>

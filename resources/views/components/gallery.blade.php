@@ -1,6 +1,6 @@
 @props(['product', 'images_url'])
 
-<div data-gallery="simple">
+<div data-gallery="simple" {{ $attributes }}>
     @php($images_url = (array) json_decode($product->images->url))
     @foreach($images_url as $image_url)
         <figure id="image-{{ $loop->iteration }}">
@@ -10,7 +10,6 @@
                 <img src="{{ '/storage/'.$image_url }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:90vh">
             @endif
         </figure>
-        @php($img_count = $loop->count)
     @endforeach
     <nav>
         @foreach($images_url as $image_url)

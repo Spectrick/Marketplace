@@ -6,13 +6,13 @@
 @section('main.content')
     <table id="cart" class="table table-hover table-condensed">
         <thead>
-        <tr>
-            <th style="width:50%">{{ __('Товар') }}</th>
-            <th style="width:10%">{{ __('Цена') }}</th>
-            <th style="width:8%">{{ __('Количество') }}</th>
-            <th style="width:22%" class="text-center">{{ __('Всего') }}</th>
-            <th style="width:10%"></th>
-        </tr>
+            <tr>
+                <th style="width:50%">{{ __('Товар') }}</th>
+                <th style="width:10%">{{ __('Цена') }}</th>
+                <th style="width:8%">{{ __('Количество') }}</th>
+                <th style="width:22%" class="text-center">{{ __('Всего') }}</th>
+                <th style="width:10%"></th>
+            </tr>
         </thead>
         <tbody>
         @php $total = 0 @endphp
@@ -47,61 +47,65 @@
         @endif
         </tbody>
         <tfoot>
-        <tr>
-            <td colspan="5" class="text-right"><h3><strong>{{ __('Всего к оплате') }} {{ $total }} ₽</strong></h3></td>
-        </tr>
-        <tr>
-            <td colspan="5" class="text-right">
-                <a href="{{ url('/products') }}" class="btn btn-primary">
-                    <i class="fa fa-angle-left"></i> {{ __('Продолжить покупки') }}
-                </a>
-                <button class="btn btn-success">{{ __('Оформить заказ') }}</button>
-            </td>
-        </tr>
+            <tr>
+                <td colspan="5" class="text-right"><h3><strong>{{ __('Всего к оплате') }} {{ $total }} ₽</strong></h3></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-right">
+                    <a href="{{ url('/products') }}" class="btn btn-primary">
+                        <i class="fa fa-angle-left"></i> {{ __('Продолжить покупки') }}
+                    </a>
+                    <button class="btn btn-success">
+                        {{ __('Оформить заказ') }}
+                    </button>
+                </td>
+            </tr>
         </tfoot>
     </table>
 @endsection
 
-@push('js')
-    <script type="text/javascript">
+@once
+    @push('js')
+        <script type="text/javascript">
 
-        $(".update-cart").change(function (e) {
-            e.preventDefault();
+            $(".update-cart").change(function (e) {
+                e.preventDefault();
 
-            var ele = $(this);
+                var ele = $(this);
 
-            $.ajax({
-                url: '{{ route('cart.update') }}',
-                method: "patch",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id: ele.parents("tr").attr("data-id"),
-                    quantity: ele.parents("tr").find(".quantity").val()
-                },
-                success: function (response) {
-                    window.location.reload();
-                }
-            });
-        });
-
-        $(".remove-from-cart").click(function (e) {
-            e.preventDefault();
-
-            var ele = $(this);
-
-            if(confirm("Вы действительно хотите удалить товар из корзины?")) {
                 $.ajax({
-                    url: '{{ route('cart.remove') }}',
-                    method: "DELETE",
+                    url: '{{ route('cart.update') }}',
+                    method: "patch",
                     data: {
                         _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("data-id")
+                        id: ele.parents("tr").attr("data-id"),
+                        quantity: ele.parents("tr").find(".quantity").val()
                     },
                     success: function (response) {
                         window.location.reload();
                     }
                 });
-            }
-        });
-    </script>
-@endpush
+            });
+
+            $(".remove-from-cart").click(function (e) {
+                e.preventDefault();
+
+                var ele = $(this);
+
+                if(confirm("Вы действительно хотите удалить товар из корзины?")) {
+                    $.ajax({
+                        url: '{{ route('cart.remove') }}',
+                        method: "DELETE",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id: ele.parents("tr").attr("data-id")
+                        },
+                        success: function (response) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+        </script>
+    @endpush
+@endonce

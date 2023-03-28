@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\User;
 
@@ -26,7 +26,7 @@ class CommentSeeder extends Seeder
             $users = User::inRandomOrder()->where('id', '>', 1)->get();
 
             foreach ($users as $user) {
-                Comment::create([
+                DB::table('comments')->insert([
                     'created_at' => now(),
                     'updated_at' => now(),
                     'product_id' => $product->id,

@@ -1,4 +1,4 @@
-<x-form action="{{ route('products') }}" method="GET">
+<x-form action="{{ (isAdmin(Auth::user())) ? route('admin.products') : route('products') }}" method="GET">
     <div class="row">
         <div class="col-12 col-md-4">
             <div class="mb-3">

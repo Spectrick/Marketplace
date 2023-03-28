@@ -15,10 +15,8 @@ if (! function_exists('alert')) {
 
     function alert (string $value, string $type = 'success')
     {
-        session([
-            'alert' => $value,
-            'type' => $type,
-        ]);
+        session()->flash('flash.message', $value);
+        session()->flash('flash.type', $type);
     }
 }
 

@@ -42,7 +42,7 @@
             <x-form-item>
                 <div class="row justify-content-between mx-3">
                     <div class="col my-auto">
-                        {{ __('Изображение пользователя') }} :
+                        {{ __('Изображение пользователя') }}:
                     </div>
                     <div class="avatar col text-center">
                         @if($user->avatar)

@@ -36,9 +36,7 @@
             </h3>
 
             @if($product->images->url)
-                <div class="text-center">
-                    <x-gallery :product="$product" />
-                </div>
+                <x-gallery class="text-center" :product="$product" />
             @endif
 
             <dl class="row mt-3">

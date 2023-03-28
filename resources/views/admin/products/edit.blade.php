@@ -12,16 +12,17 @@
                 {{ __('Назад') }}
             </a>
         </x-slot>
+        <x-slot name="right">
+            <x-form action="{{ route('admin.products.delete', $product->id) }}" method="post">
+                @method('DELETE')
+                <x-button type="submit" color="secondary">
+                    {{ __('Удалить') }}
+                </x-button>
+            </x-form>
+        </x-slot>
     </x-title>
 
     @include('includes.errors')
-
-    <x-form action="{{ route('admin.products.delete', $product->id) }}" method="post">
-        @method('DELETE')
-        <x-button type="submit" color="secondary">
-            {{ __('Удалить') }}
-        </x-button>
-    </x-form>
 
     <x-product.form action="{{ route('admin.products.update', $product->id) }}" method="put"
                     enctype="multipart/form-data" :product="$product" :categories="$categories">
