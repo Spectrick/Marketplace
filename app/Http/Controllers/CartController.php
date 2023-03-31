@@ -44,8 +44,8 @@ class CartController extends Controller
 
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
             alert(__('Количество товара обновлено'));
-
         }
     }
 

@@ -28,17 +28,23 @@
                                 <img src="{{ $details['image'] }}" width="100" class="img-responsive" />
                             </div>
                             <div class="col-sm-9">
-                                <h4 class="nomargin">{{ $details['name'] }}</h4>
+                                <a href="{{ (isAdmin(Auth::user()) ? route('admin.products.show', $id) : route('products.show', $id)) }}">
+                                    <h5 class="nomargin pt-2">{{ $details['name'] }}</h5>
+                                </a>
                             </div>
                         </div>
                     </td>
-                    <td data-th="Price">{{ $details['price'] }} ₽</td>
+                    <td data-th="Price" class="pt-3">
+                        {{ $details['price'] }} ₽
+                    </td>
                     <td data-th="Quantity">
                         <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />
                     </td>
-                    <td data-th="Subtotal" class="text-center">{{ $details['price'] * $details['quantity'] }} ₽</td>
+                    <td data-th="Subtotal" class="text-center pt-3">
+                        {{ $details['price'] * $details['quantity'] }} ₽
+                    </td>
                     <td class="actions" data-th="">
-                        <button class="btn btn-danger btn-sm remove-from-cart">
+                        <button class="btn btn-danger btn-sm remove-from-cart mt-1">
                             <i class="fa fa-trash-o"></i>
                         </button>
                     </td>
@@ -48,11 +54,13 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5" class="text-right"><h3><strong>{{ __('Всего к оплате') }} {{ $total }} ₽</strong></h3></td>
+                <td colspan="5" class="text-right">
+                    <h3><strong>{{ __('Всего к оплате') }} {{ $total }} ₽</strong></h3>
+                </td>
             </tr>
             <tr>
                 <td colspan="5" class="text-right">
-                    <a href="{{ url('/products') }}" class="btn btn-primary">
+                    <a href="{{ (isAdmin(Auth::user()) ? route('admin.products') : route('products')) }}" class="btn btn-primary">
                         <i class="fa fa-angle-left"></i> {{ __('Продолжить покупки') }}
                     </a>
                     <button class="btn btn-success">
@@ -75,7 +83,7 @@
 
                 $.ajax({
                     url: '{{ route('cart.update') }}',
-                    method: "patch",
+                    method: "put",
                     data: {
                         _token: '{{ csrf_token() }}',
                         id: ele.parents("tr").attr("data-id"),

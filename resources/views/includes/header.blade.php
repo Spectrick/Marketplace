@@ -24,14 +24,14 @@
 
             <ul class="navbar-nav ms-auto">
                 @auth
-                    <li class="nav-item">
+                    <li class="nav-item my-auto">
                         <x-cart-dropdown-menu />
                     </li>
                     <li class="nav-item my-auto">
                         <div class="row mx-auto">
                             <div class="inline-block">
                                 @if(Auth::user()->avatar)
-                                    <img src="{{ Auth::user()->avatar }}" class="img-thumbnail" alt="{{ Auth::user()->name }}" style="height:40px">
+                                    <img src="{{ Auth::user()->avatar }}" class="img-thumbnail" alt="{{ Auth::user()->name }}" style="height:38px">
                                 @endif
                                 <a href="{{ route('user') }}">
                                     {{ Auth::user()->name }}
@@ -42,7 +42,7 @@
                     <li class="nav-item my-auto">
                         <x-form id="logout-form" action="{{ route('logout') }}" method="GET">
                             <x-button class="border pb-1 pe-2" type="submit" color="light">
-                                <i class="fa fa-sign-out" style="font-size:24px"></i>
+                                <i class="fa fa-sign-out" style="font-size:22px"></i>
                             </x-button>
                         </x-form>
                     </li>

@@ -43,7 +43,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        alert(__('Вы вышли из учётной записи'), 'secondary');
+        alert(__('Вы вышли из учётной записи'), 'dark');
 
         return redirect('/');
 
