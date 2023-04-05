@@ -3,7 +3,8 @@
         <a href="{{ route('home') }}" class="navbar-brand">
             {{ config('app.name') }}
         </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -23,6 +24,9 @@
             </ul>
 
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item my-auto me-3">
+                    <x-currency-dropdown-menu />
+                </li>
                 @auth
                     <li class="nav-item my-auto">
                         <x-cart-dropdown-menu />
@@ -47,13 +51,13 @@
                         </x-form>
                     </li>
                 @else
-                    <li class="nav-item">
+                    <li class="nav-item my-auto">
                         <a href="{{ route('register') }}" class="nav-link {{ activeLink('register') }}">
                             {{ __('Регистрация') }}
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item my-auto">
                         <a href="{{ route('login') }}" class="nav-link {{ activeLink('login') }}">
                             {{ __('Вход') }}
                         </a>

@@ -7,7 +7,7 @@
         <h1 class="mb-3">
             {{ __('Добро пожаловать в Marketplace!') }}
         </h1>
-        <x-button-link href="{{route('products')}}">
+        <x-button-link href="{{ (isAdmin(Auth::user())) ? route('admin.products') : route('products') }}">
             {{ __('Перейти в каталог') }}
         </x-button-link>
     </div>

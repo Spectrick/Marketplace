@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CurrencyController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\User\RegisterController;
@@ -34,4 +35,7 @@ Route::middleware('auth')->group(function() {
     Route::get('user', [UserController::class, 'index'])->name('user');
     Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
+});
+Route::middleware('setCurrency')->group(function() {
+    Route::post('currency/change', [CurrencyController::class, 'change'])->name('currency.change');
 });

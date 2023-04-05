@@ -17,6 +17,10 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($id);
 
+        if (session('currency') !== 'RUB') {
+            $product->price = currencyConvert('RUB', session('currency'), $product->price, 2);
+        }
+
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
@@ -57,7 +61,7 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            alert(__('Товар удалён из корзины'));
+            alert(__('Товар удалён из корзины'), 'dark');
         }
     }
 }

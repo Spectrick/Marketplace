@@ -46,7 +46,7 @@
                 <dd class="col-sm-9">
                     <div class="text-light badge bg-primary text-wrap my-2 align-self-start">
                         <h6 class="mb-0">
-                            {{ $product->price }} ₽
+                            {{ $product->price }} {{ session('currency') }}
                         </h6>
                     </div>
                 </dd>

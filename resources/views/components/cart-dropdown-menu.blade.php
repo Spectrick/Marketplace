@@ -25,7 +25,7 @@
                 <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
                     <p>{{ __('Всего') }}:
                         <span class="text-info">
-                            {{ $total }} ₽
+                            {{ $total }} {{ session('currency') }}
                         </span>
                     </p>
                 </div>
@@ -41,7 +41,7 @@
                                 {{ $details['name'] }}
                             </p>
                             <span class="price text-info">
-                                {{ $details['price'] }} ₽
+                                {{ $details['price'] }} {{ session('currency') }}
                             </span>
                             <span class="count">
                                 {{ __('Количество') }}: {{ $details['quantity'] }}

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CommentController;
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group (function ()
+Route::prefix('admin')->middleware(['auth', 'admin', 'setCurrency'])->group (function ()
 {
     Route::get('products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('products/create', [ProductController::class, 'create'])->name('admin.products.create');

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
 use Illuminate\Http\Request;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Image;
+use App\Models\Comment;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +23,7 @@ class ProductController extends Controller
         $validated = $request->validate([
            'search' => ['nullable', 'string', 'max:50'],
            'category_id' => ['nullable', 'integer'],
+           'currency' => ['string'],
         ]);
 
         $products = Product::query()
@@ -40,6 +41,14 @@ class ProductController extends Controller
                 })
             ->latest('id')
             ->paginate(24);
+
+        if (session('currency') !== 'RUB') {
+            $exchange_rate = currencyConvert('RUB', session('currency'), 1, 8);
+
+            foreach ($products as $product) {
+                $product->price = round($product->price * $exchange_rate, 2);
+            }
+        }
 
         return view('admin.products.index', compact('products', 'categories'));
     }
@@ -102,7 +111,11 @@ class ProductController extends Controller
     {
         $product = Product::query()->findOrFail($product_id);
 
-        $ratings = Comment::where('product_id', $product_id)
+        if (session('currency') !== 'RUB') {
+            $product['price'] = currencyConvert('RUB', session('currency'), $product['price'], 2);
+        }
+
+        $ratings = Comment::query()->where('product_id', $product_id)
             ->groupBy('rating')
             ->selectRaw('rating, count(*) as count, count(*) / (select count(*) from comments where product_id = ?) * 100 as percentage', [$product_id])
             ->get();

@@ -5,7 +5,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CommentController;
 
 
-Route::prefix('products')->group (function ()
+Route::prefix('products')->middleware('setCurrency')->group(function ()
 {
     Route::get('/', [ProductController::class, 'index'])->name('products');
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');

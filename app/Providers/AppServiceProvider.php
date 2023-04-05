@@ -26,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFour();
 
+        if (!session()->has('currency')) {
+            session()->put('currency', 'RUB');
+        }
     }
 }

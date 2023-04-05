@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
 
         'active' => \App\Http\Middleware\ActiveMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'setCurrency' => \App\Http\Middleware\SetCurrencyMiddleware::class,
     ];
 }

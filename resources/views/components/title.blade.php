@@ -15,13 +15,13 @@
 
             <div class="row">
                 @isset($right)
-                    <div class="col-sm-5 me-3">
+                    <div class="{{ isset($right_2) ? 'col-sm-6' : 'col-sm-12 me-3' }}">
                         {{ $right }}
                     </div>
                 @endisset
 
                 @isset($right_2)
-                    <div class="col-sm-4 me-3">
+                    <div class="col-sm-4 me-1">
                         {{ $right_2 }}
                     </div>
                 @endisset

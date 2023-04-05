@@ -39,12 +39,24 @@ class ProductController extends Controller
             ->latest('id')
             ->paginate(24);
 
+        if (session('currency') !== 'RUB') {
+            $exchange_rate = currencyConvert('RUB', session('currency'), 1, 8);
+
+            foreach ($products as $product) {
+                $product->price = round($product->price * $exchange_rate, 2);
+            }
+        }
+
         return view('products.index', compact('products', 'categories'));
     }
 
     public function show ($product_id)
     {
         $product = Product::query()->findOrFail($product_id);
+
+        if (session('currency') !== 'RUB') {
+            $product['price'] = currencyConvert('RUB', session('currency'), $product['price'], 2);
+        }
 
         $ratings = Comment::where('product_id', $product_id)
             ->groupBy('rating')

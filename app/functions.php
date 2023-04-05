@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Illuminate\Support\Facades\Route;
+use AmrShawky\LaravelCurrency\Facade\Currency;
 
 if (! function_exists('activeLink')) {
 
@@ -32,3 +33,17 @@ if (! function_exists('isAdmin')) {
     }
 }
 
+if (! function_exists('currencyConvert')) {
+
+    function currencyConvert (string $from, string $to, float $amount, int $round)
+    {
+        $result = Currency::convert()
+            ->from($from)
+            ->to($to)
+            ->amount($amount)
+            ->round($round)
+            ->get();
+
+        return $result;
+    }
+}

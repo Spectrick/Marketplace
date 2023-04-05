@@ -150,6 +150,25 @@ class ProductSeeder extends Seeder
                 'url' => json_encode($image_url),
                 'thumbnail' => $thumbnail_base64,
             ]);
+
+            DB::table('currencies')->insert([
+                'id' => [
+                    'RUB',
+                    'USD',
+                    'EUR'
+                ],
+                'name' => [
+                    'Российский рубль',
+                    'Доллар США',
+                    'Евро'
+                ],
+                'price' => [
+                    '1',
+                    currencyConvert('USD', 'RUB', 1, 4),
+                    currencyConvert('EUR', 'RUB', 1, 4)
+                ],
+                'active' => true,
+            ]);
         }
     }
 }

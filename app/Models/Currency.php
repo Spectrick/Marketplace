@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use AmrShawky\LaravelCurrency\Facade\Currency as ExchangeCurrency;
 
 class Currency extends Model
 {
-    use HasFactory;
-
     public $incrementing = false;
 
     protected $fillable = [
