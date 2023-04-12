@@ -7,17 +7,6 @@ use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\UserController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::view('/','home.index')->name('home');
 
 Route::middleware('guest')->group(function()
@@ -29,13 +18,13 @@ Route::middleware('guest')->group(function()
     Route::post('login', [LoginController::class, 'store'])->name('login.store');
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function()
+{
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('user', [UserController::class, 'index'])->name('user');
     Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
 });
-Route::middleware('setCurrency')->group(function() {
-    Route::post('currency/change', [CurrencyController::class, 'change'])->name('currency.change');
-});
+
+    Route::post('currency/change', [CurrencyController::class, 'change'])->name('currency.change')->middleware('setCurrency');

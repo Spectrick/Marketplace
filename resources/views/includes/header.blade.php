@@ -24,10 +24,10 @@
             </ul>
 
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item my-auto me-3">
-                    <x-currency-dropdown-menu />
-                </li>
                 @auth
+                    <li class="nav-item my-auto me-3">
+                        <x-currency-dropdown-menu />
+                    </li>
                     <li class="nav-item my-auto">
                         <x-cart-dropdown-menu />
                     </li>
