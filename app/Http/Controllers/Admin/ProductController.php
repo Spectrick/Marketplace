@@ -29,9 +29,9 @@ class ProductController extends Controller
         $products = Product::query()
             ->when(
                 $validated['category_id'] ?? null,
-                function (Builder $query, int $category_id) {
+                function (Builder $query, int $categoryId) {
                     $query
-                        ->where('category_id', $category_id);
+                        ->where('category_id', $categoryId);
             })
             ->when(
                 $validated['search'] ?? null,
@@ -43,10 +43,10 @@ class ProductController extends Controller
             ->paginate(24);
 
         if (session('currency') !== 'RUB') {
-            $exchange_rate = currencyConvert('RUB', session('currency'), 1, 8);
+            $exchangeRate = currencyConvert('RUB', session('currency'), 1, 8);
 
             foreach ($products as $product) {
-                $product->price = round($product->price * $exchange_rate, 2);
+                $product->price = round($product->price * $exchangeRate, 2);
             }
         }
 
@@ -82,24 +82,24 @@ class ProductController extends Controller
 
         $images = array();
 
-        foreach ($validated['images'] as $image_file) {
-            $image_name = time() . uniqid() . '.' . $image_file->getClientOriginalExtension();
-            $image_url = $image_file->storeAs('images/products', $image_name,'public');
+        foreach ($validated['images'] as $imageFile) {
+            $imageName = time() . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+            $imageUrl = $imageFile->storeAs('images/products', $imageName,'public');
 
-            array_push($images, $image_url);
+            array_push($images, $imageUrl);
         }
 
         $thumbnail = ImageResize::make($validated['images'][0])->resize(250, 250, function ($constraint) {
                 return $constraint->aspectRatio();
             });
 
-        $thumbnail_base64 = (string) $thumbnail->encode('data-url');
+        $thumbnailBase64 = (string) $thumbnail->encode('data-url');
 
         Image::query()->create([
             'product_id' => $product->id,
             'alt' => $validated['name'],
             'url' =>  json_encode($images),
-            'thumbnail' => $thumbnail_base64
+            'thumbnail' => $thumbnailBase64
         ]);
 
         alert(__('Товар добавлен!'));
@@ -107,29 +107,29 @@ class ProductController extends Controller
         return redirect()->route('admin.products.show', $product->id);
     }
 
-    public function show ($product_id)
+    public function show ($productId)
     {
-        $product = Product::query()->findOrFail($product_id);
+        $product = Product::query()->findOrFail($productId);
 
         if (session('currency') !== 'RUB') {
             $product['price'] = currencyConvert('RUB', session('currency'), $product['price'], 2);
         }
 
-        $ratings = Comment::query()->where('product_id', $product_id)
+        $ratings = Comment::query()->where('product_id', $productId)
             ->groupBy('rating')
-            ->selectRaw('rating, count(*) as count, count(*) / (select count(*) from comments where product_id = ?) * 100 as percentage', [$product_id])
+            ->selectRaw('rating, count(*) as count, count(*) / (select count(*) from comments where product_id = ?) * 100 as percentage', [$productId])
             ->get();
 
-        $product_rating['avg'] = round(Comment::query()->where('product_id', $product_id)->avg('rating'), 2);
+        $productRating['avg'] = round(Comment::query()->where('product_id', $productId)->avg('rating'), 2);
 
-        $product_rating['total'] = $ratings->sum('count');
+        $productRating['total'] = $ratings->sum('count');
 
         foreach ($ratings as $rating) {
-            $product_rating[$rating->rating]['count'] = $rating->count;
-            $product_rating[$rating->rating]['percentage'] = round($rating->percentage, 1);
+            $productRating[$rating->rating]['count'] = $rating->count;
+            $productRating[$rating->rating]['percentage'] = round($rating->percentage, 1);
         }
 
-        return view('admin.products.show', compact('product', 'product_rating'));
+        return view('admin.products.show', compact('product', 'productRating'));
     }
 
     public function edit (Product $product)
@@ -139,7 +139,7 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    public function update (Request $request, $product_id)
+    public function update (Request $request, $productId)
     {
         $validated = $request->validate([
             'name' => ['required','string','max:100'],
@@ -151,7 +151,7 @@ class ProductController extends Controller
             'images.*' => ['image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
         ]);
 
-        $product = Product::query()->findOrFail($product_id);
+        $product = Product::query()->findOrFail($productId);
 
         $product['name'] = $validated['name'];
         $product['price'] = $validated['price'];
@@ -163,34 +163,34 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
 
-            $images = Product::find($product_id)->images;
+            $images = Product::find($productId)->images;
 
-            $images_url = (array) json_decode($images->url);
+            $imagesUrl = (array) json_decode($images->url);
 
-            foreach ($images_url as $image_url) {
-                if(!str_starts_with($image_url, 'http')) {
-                    Storage::disk('public')->delete($image_url);
+            foreach ($imagesUrl as $imageUrl) {
+                if(!str_starts_with($imageUrl, 'http')) {
+                    Storage::disk('public')->delete($imageUrl);
                 }
             }
 
-            $images_array = array();
+            $imagesArray = array();
 
-            foreach ($validated['images'] as $image_file) {
+            foreach ($validated['images'] as $imageFile) {
 
-                $image_name = time() . uniqid() . '.' . $image_file->getClientOriginalExtension();
-                $image_url = $image_file->storeAs('images/products', $image_name, 'public');
+                $imageName = time() . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                $imageUrl = $imageFile->storeAs('images/products', $imageName, 'public');
 
-                array_push($images_array, $image_url);
+                array_push($imagesArray, $imageUrl);
             }
 
             $thumbnail = ImageResize::make($validated['images'][0])->resize(150, 150, function ($constraint) {
                 return $constraint->aspectRatio();
             });
 
-            $thumbnail_base64 = (string)$thumbnail->encode('data-url');
+            $thumbnailBase64 = (string)$thumbnail->encode('data-url');
 
-            $images->url = json_encode($images_array);
-            $images->thumbnail = $thumbnail_base64;
+            $images->url = json_encode($imagesArray);
+            $images->thumbnail = $thumbnailBase64;
 
             $images->save();
         }
@@ -200,24 +200,24 @@ class ProductController extends Controller
         return redirect()->route('admin.products.show', $product['id']);
     }
 
-    public function delete ($product_id)
+    public function delete ($productId)
     {
-        $images = Product::findOrFail($product_id)->images;
+        $images = Product::findOrFail($productId)->images;
 
         if (!empty($images)) {
 
-            $images_url = (array) json_decode($images->url);
+            $imagesUrl = (array) json_decode($images->url);
 
-            foreach ($images_url as $image_url) {
-                if(!str_starts_with($image_url, 'http')) {
-                    Storage::disk('public')->delete($image_url);
+            foreach ($imagesUrl as $imageUrl) {
+                if(!str_starts_with($imageUrl, 'http')) {
+                    Storage::disk('public')->delete($imageUrl);
                 }
             }
 
             Image::destroy($images->id);
         }
 
-        Product::destroy($product_id);
+        Product::destroy($productId);
 
         alert(__('Товар удалён'));
 

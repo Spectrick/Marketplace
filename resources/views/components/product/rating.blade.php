@@ -1,4 +1,4 @@
-@props(['product_rating'])
+@props(['productRating'])
 
 <div {{ $attributes->class(['row']) }}>
     <div class="col-xs-12 col-md-8">
@@ -6,11 +6,11 @@
             <div class="row">
                 <div class="col-xs-12 col-md-3 pe-0 text-center">
                     <h1 class="rating-num">
-                        {{ $product_rating['avg'] }}
+                        {{ $productRating['avg'] }}
                     </h1>
                     <div class="rating">
                         @for($i = 1; $i <= 5; $i++)
-                            @if($product_rating['avg'] < $i)
+                            @if($productRating['avg'] < $i)
                                 <i class="text-warning fa fa-star-o"></i>
                             @else
                                 <i class="text-warning fa fa-star"></i>
@@ -18,7 +18,7 @@
                         @endfor
                     </div>
                     <div>
-                        <i class="fa fa-user" aria-hidden="true"></i> {{ $product_rating['total'] }} {{ __('отзывов') }}
+                        <i class="fa fa-user" aria-hidden="true"></i> {{ $productRating['total'] }} {{ __('отзывов') }}
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-9 ps-0">
@@ -30,35 +30,35 @@
                                 @endfor
                             </div>
                             <div class="col-md-1 mx-1 px-0 text-center">
-                                ({{ ($product_rating[$i]['count'] ?? 0) }})
+                                ({{ ($productRating[$i]['count'] ?? 0) }})
                             </div>
                             <div class="col-xs-8 col-md-6 pe-0">
-                                <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="{{ ($product_rating[$i]['percentage'] ?? 0) }}"
+                                <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="{{ ($productRating[$i]['percentage'] ?? 0) }}"
                                      aria-valuemin="0" aria-valuemax="100">
                                     @switch($i)
                                         @case(5)
-                                            <div class="progress-bar progress-bar-striped bg-success" style="width: {{ ($product_rating[$i]['percentage'] ?? 0) }}%">
-                                                {{ ($product_rating[$i]['percentage'] ?? 0) }}%
+                                            <div class="progress-bar progress-bar-striped bg-success" style="width: {{ ($productRating[$i]['percentage'] ?? 0) }}%">
+                                                {{ ($productRating[$i]['percentage'] ?? 0) }}%
                                             </div>
                                             @break
                                         @case(4)
-                                            <div class="progress-bar bg-success" style="width: {{ ($product_rating[$i]['percentage'] ?? 0) }}%">
-                                                {{ ($product_rating[$i]['percentage'] ?? 0) }}%
+                                            <div class="progress-bar bg-success" style="width: {{ ($productRating[$i]['percentage'] ?? 0) }}%">
+                                                {{ ($productRating[$i]['percentage'] ?? 0) }}%
                                             </div>
                                             @break
                                         @case(3)
-                                            <div class="progress-bar bg-info" style="width: {{ ($product_rating[$i]['percentage'] ?? 0) }}%">
-                                                {{ ($product_rating[$i]['percentage'] ?? 0) }}%
+                                            <div class="progress-bar bg-info" style="width: {{ ($productRating[$i]['percentage'] ?? 0) }}%">
+                                                {{ ($productRating[$i]['percentage'] ?? 0) }}%
                                             </div>
                                         @break
                                         @case(2)
-                                            <div class="progress-bar bg-warning" style="width: {{ ($product_rating[$i]['percentage'] ?? 0) }}%">
-                                                {{ ($product_rating[$i]['percentage'] ?? 0) }}%
+                                            <div class="progress-bar bg-warning" style="width: {{ ($productRating[$i]['percentage'] ?? 0) }}%">
+                                                {{ ($productRating[$i]['percentage'] ?? 0) }}%
                                             </div>
                                         @break
                                         @case(1)
-                                            <div class="progress-bar bg-danger" style="width: {{ ($product_rating[$i]['percentage'] ?? 0) }}%">
-                                                {{ ($product_rating[$i]['percentage'] ?? 0) }}%
+                                            <div class="progress-bar bg-danger" style="width: {{ ($productRating[$i]['percentage'] ?? 0) }}%">
+                                                {{ ($productRating[$i]['percentage'] ?? 0) }}%
                                             </div>
                                         @break
                                     @endswitch

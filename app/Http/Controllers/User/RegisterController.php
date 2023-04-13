@@ -31,14 +31,14 @@ class RegisterController extends Controller
             $avatar = ImageResize::make($validated['avatar'])->resize(100, 100, function ($constraint) {
                 return $constraint->aspectRatio();
             });
-            $avatar_base64 = (string) $avatar->encode('data-url');
+            $avatarBase64 = (string) $avatar->encode('data-url');
         }
 
         $user = User::query()->create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
-            'avatar' => $avatar_base64 ?? null,
+            'avatar' => $avatarBase64 ?? null,
         ]);
 
         $user->save();

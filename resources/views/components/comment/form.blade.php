@@ -1,11 +1,11 @@
-@props(['product_id', 'comment'])
+@props(['productId', 'comment'])
 
 <div class="row">
     <div class="col mt-4">
         <x-form class="py-2 px-4" {{ $attributes }} style="box-shadow: 0 0 10px 0 #ddd;" autocomplete="off">
             <p class="fw-bold">{{ __('Отзыв') }}</p>
             <div class="form-group row">
-                <input type="hidden" name="product_id" value="{{ $product_id }}">
+                <input type="hidden" name="product_id" value="{{ $productId }}">
                 <div class="col">
                     <div class="rate">
                         @if(isset($comment))

@@ -70,19 +70,19 @@ class ProductSeederSimple extends Seeder
 
         for ($i = 1; $i <= 50; $i++) {
 
-            $random_id = mt_rand(1, count($categories));
+            $randomId = mt_rand(1, count($categories));
 
             DB::table('products')->insert([
                 'name' => $faker->text(15),
                 'description' => $faker->text(150),
                 'price' => mt_rand(500, 100000),
                 'published' => true,
-                'category_id' => $random_id,
+                'category_id' => $randomId,
             ]);
 
-            $thumbnail_url = $faker->imageUrl(300, 300, true);
+            $thumbnailUrl = $faker->imageUrl(300, 300, true);
 
-            $thumbnail = 'data:image/png;base64,' . base64_encode(file_get_contents($thumbnail_url));
+            $thumbnail = 'data:image/png;base64,' . base64_encode(file_get_contents($thumbnailUrl));
 
             DB::table('images')->insert([
                 'product_id' => $i,

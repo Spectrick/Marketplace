@@ -14,9 +14,9 @@ class UserSeeder extends Seeder
 
             $faker = Faker::create();
 
-            $thumbnail_url = $faker->imageUrl(300, 300, 'people', true);
+            $thumbnailUrl = $faker->imageUrl(300, 300, 'people', true);
 
-            $thumbnail = 'data:image/png;base64,' . base64_encode(file_get_contents($thumbnail_url));
+            $thumbnail = 'data:image/png;base64,' . base64_encode(file_get_contents($thumbnailUrl));
 
             $email = $faker->userName() . '@' . 'maildomain.com';
 

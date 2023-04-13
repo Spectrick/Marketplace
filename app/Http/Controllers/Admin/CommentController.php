@@ -10,14 +10,14 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public function index($product_id)
+    public function index($productId)
     {
-        $comments = Comment::where('product_id', $product_id)->get();
+        $comments = Comment::where('product_id', $productId)->get();
 
-        return view('admin.products.comments.index', compact('comments', 'product_id'));
+        return view('admin.products.comments.index', compact('comments', 'productId'));
     }
 
-    public function store(Request $request, $product_id)
+    public function store(Request $request, $productId)
     {
         $validated = $request->validate([
             'message' => ['required','string','max:1000'],
@@ -25,7 +25,7 @@ class CommentController extends Controller
         ]);
 
         $comment = Comment::query()->create([
-            'product_id' => $product_id,
+            'product_id' => $productId,
             'user_id' => Auth::user()->id,
             'message' => $validated['message'],
             'rating' => $validated['rating'] ?? 0,
@@ -38,23 +38,23 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
-    public function edit($product_id, $comment_id)
+    public function edit($productId, $commentId)
     {
-        $comment = Comment::query()->findOrFail($comment_id);
+        $comment = Comment::query()->findOrFail($commentId);
 
-        return view('admin.products.comments.edit', compact('product_id', 'comment'));
+        return view('admin.products.comments.edit', compact('productId', 'comment'));
     }
 
-    public function update(Request $request, $product_id, $comment_id)
+    public function update(Request $request, $productId, $commentId)
     {
         $validated = $request->validate([
             'message' => ['required','string','max:1000'],
             'rating' => ['integer','max:5'],
         ]);
 
-        $comment = Comment::query()->findOrFail($comment_id);
+        $comment = Comment::query()->findOrFail($commentId);
 
-        $comment['product_id'] = $product_id;
+        $comment['product_id'] = $productId;
         $comment['user_id'] = Auth::user()->id;
         $comment['message'] = $validated['message'];
         $comment['rating'] = $validated['rating'] ?? 0;

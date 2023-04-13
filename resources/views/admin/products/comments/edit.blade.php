@@ -6,12 +6,12 @@
     <div class="container" style="max-width: 960px;">
         <x-title>
             {{ __('Редактирование отзыва о товаре') }}
-            <a href="{{ route('admin.products.show', $product_id) }}">
-                {{ App\Models\Product::query()->findOrFail($product_id)->name }}
+            <a href="{{ route('admin.products.show', $productId) }}">
+                {{ App\Models\Product::query()->findOrFail($productId)->name }}
             </a>
 
             <x-slot name="right">
-                <a href="{{ route('admin.products.comments', $product_id) }}">
+                <a href="{{ route('admin.products.comments', $productId) }}">
                     {{ __('Назад') }}
                 </a>
             </x-slot>
@@ -19,8 +19,8 @@
 
         <x-comment.item :comment="$comment" />
 
-        <x-comment.form action="{{ route('admin.products.comments.update', ['product' => $product_id, 'comment' => $comment->id]) }}"
-                        method="put" :product_id="$product_id" :comment="$comment">
+        <x-comment.form action="{{ route('admin.products.comments.update', ['product' => $productId, 'comment' => $comment->id]) }}"
+                        method="put" :productId="$productId" :comment="$comment">
             <div class="mt-3 text-right">
                 <x-button type="submit" class="py-2 px-3" size="sm">
                     {{ __('Сохранить изменения') }}

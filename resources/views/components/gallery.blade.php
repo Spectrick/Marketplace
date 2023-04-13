@@ -1,23 +1,23 @@
-@props(['product', 'images_url'])
+@props(['product', 'imagesUrl'])
 
 <div data-gallery="simple" {{ $attributes }}>
-    @php($images_url = (array) json_decode($product->images->url))
-    @foreach($images_url as $image_url)
+    @php($imagesUrl = (array) json_decode($product->images->url))
+    @foreach($imagesUrl as $imageUrl)
         <figure id="image-{{ $loop->iteration }}">
-            @if(str_starts_with($image_url, 'http'))
-                <img src="{{ $image_url }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:90vh">
+            @if(str_starts_with($imageUrl, 'http'))
+                <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:90vh">
             @else
-                <img src="{{ '/storage/'.$image_url }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:90vh">
+                <img src="{{ '/storage/'.$imageUrl }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:90vh">
             @endif
         </figure>
     @endforeach
     <nav>
-        @foreach($images_url as $image_url)
+        @foreach($imagesUrl as $imageUrl)
             <a href="#image-{{ $loop->iteration }}">
-                @if(str_starts_with($image_url, 'http'))
-                    <img src="{{ $image_url }}" alt="{{ $product->name }}" class="col-sm-1">
+                @if(str_starts_with($imageUrl, 'http'))
+                    <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="col-sm-1">
                 @else
-                    <img src="{{ '/storage/'.$image_url }}" alt="{{ $product->name }}" class="col-sm-1">
+                    <img src="{{ '/storage/'.$imageUrl }}" alt="{{ $product->name }}" class="col-sm-1">
                 @endif
             </a>
         @endforeach

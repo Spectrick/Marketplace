@@ -8,8 +8,8 @@
         <x-title>
             <h4>
                 {{ __('Отзывы о товаре') }}
-                <a href="{{ route('products.show', $product_id) }}">
-                    {{ App\Models\Product::query()->findOrFail($product_id)->name }}
+                <a href="{{ route('products.show', $productId) }}">
+                    {{ App\Models\Product::query()->findOrFail($productId)->name }}
                 </a>
             </h4>
         </x-title>
@@ -24,7 +24,7 @@
             </div>
         @endif
 
-        <x-comment.form action="{{ route('products.comments.store', $product_id) }}" method="POST" :product_id="$product_id">
+        <x-comment.form action="{{ route('products.comments.store', $productId) }}" method="POST" :productId="$productId">
             <div class="mt-3 text-right">
                 <x-button type="submit" class="py-2 px-3" size="sm">
                     {{ __('Отправить отзыв') }}

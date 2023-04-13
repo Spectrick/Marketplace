@@ -66,7 +66,7 @@
                     {{ __('Оценка пользователей') }}:
                 </dt>
                 <dd class="col-sm-9">
-                    <x-product.rating class="justify-content-center" :product_rating="$product_rating" />
+                    <x-product.rating class="justify-content-center" :productRating="$productRating" />
                 </dd>
                 <dt class="col-sm-3">
                     {{ __('Отзывы о товаре') }}:

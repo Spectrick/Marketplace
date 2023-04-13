@@ -6,8 +6,8 @@
     <div class="container" style="max-width: 960px;">
         <x-title>
             {{ __('Отзывы о товаре') }}
-            <a href="{{ route('admin.products.show', $product_id) }}">
-                {{ App\Models\Product::query()->findOrFail($product_id)->name }}
+            <a href="{{ route('admin.products.show', $productId) }}">
+                {{ App\Models\Product::query()->findOrFail($productId)->name }}
             </a>
         </x-title>
 
@@ -23,7 +23,7 @@
                         </x-form>
                     </div>
                     <div class="float-end">
-                        <x-form action="{{ route('admin.products.comments.edit', ['product' => $product_id, 'comment' => $comment->id]) }}" method="GET">
+                        <x-form action="{{ route('admin.products.comments.edit', ['product' => $productId, 'comment' => $comment->id]) }}" method="GET">
                             <x-button type="submit">
                                 {{ __('Отредактировать') }}
                             </x-button>
@@ -37,7 +37,7 @@
             </div>
         @endif
 
-        <x-comment.form action="{{ route('admin.products.comments.store', $product_id) }}" method="POST" :product_id="$product_id">
+        <x-comment.form action="{{ route('admin.products.comments.store', $productId) }}" method="POST" :productId="$productId">
             <div class="mt-3 text-right">
                 <x-button type="submit" class="py-2 px-3" size="sm">
                     {{ __('Отправить отзыв') }}
